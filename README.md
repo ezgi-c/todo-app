@@ -6,6 +6,7 @@
 ![uml](uml.png)
 
 - reafactor to use Context
+    - moving state to App
 - use MAntine for styling.(80% of styling done today)
 
 What isContext?
