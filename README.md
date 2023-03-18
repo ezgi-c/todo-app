@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# Lab: Class 31 - To Do List Manager
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- create UML after reading the code
+  - starting from the code, work backwards
 
-## Available Scripts
+![uml](uml.png)
 
-In the project directory, you can run:
+- reafactor to use Context
+- use MAntine for styling.(80% of styling done today)
 
-### `npm start`
+What isContext?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- a react hook that allows you to store values that can be requested at any child node of the component you create the context on (and wrap)
+- context is a step in between state (local - useState) and a store or redux system (global state management)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+How?
 
-### `npm test`
+A Web Application for securely managing a To Do List.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## To Do List Manager Phase 1: Incorporate configuration settings to the application
 
-### `npm run build`
+Currently, a user can add todo tasks to the proof-of-life starter application. In this phase, we will:  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- add hard-wired, default context settings to the application so that the user can view three incomplete todo tasks.
+- In addition, the user will have the option of viewing any additional incomplete tasks by using pagination functionality.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Learning Outcomes
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Learn React context functionality and gain overall React fluency.
+- Gain provicency in reading documentation by using a new component library.
+- Practice JavaScript array manipulation by implementing pagination.
+- Gain React testing fluency.
 
-### `npm run eject`
+## Phase 1 Requirements
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+In Phase 1, we’re going to perform some refactoring of a Todo application built by another team. This application mixes application state and user settings at the top level and passes things around. It was a good proof of concept, but we need to make this production ready.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Create a Detailed UML.
+- Properly modularize the application into separate components, note the __proposed file structure__ below.
+- Implement the Context API to make some basic application settings available to components.
+  - Show three items by default.
+  - Hide completed items by default.
+  - Add the sort word ‘difficulty’ by default.
+- Style the application using the [Mantine Component API](https://mantine.dev/pages/getting-started/){target:_blank}.
+  - NOTE: The expectation to style this entire component in one day is likely unrealistic. The recommendation is to implement the required functionality, then systematically begin styling with Mantine. Match the comp image(s) as closely as possible. 80% of the design work will likely take 20% of your time. By the end of the week, being mostly there with style is the goal!
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+__Example:__
+  ![todo-app-example](todo-app-example.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+__Proposed File Structure:__
+![proposed-file-structure](file-structure.png)
 
-## Learn More
+## Technical Requirements / Notes
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+_Create a settings Context component that can define how our components should display elements to the User._
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+__1. Implement the React `context` API for defining `settings` across the entire application.__
 
-### Code Splitting
+- Create React Context for managing application display settings and provide this at the application level.
+- Add the following defaults to the context provider’s state, they will not be changeable in this lab.
+  - Display three items.
+  - Hide completed items using a boolean.
+  - Define “difficulty” as a default sort word to optionally use in the stretch goal.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+__2. Consume and utilize `context` values throughout your components.__
 
-### Analyzing the Bundle Size
+- Show a maximum of three items per screen by default in the `<List />` component.
+- Use the Mantine `<Pagination />` component to allow users to navigate a list of items.
+- Hide completed items in the list by default (the ability to show will be added in a later lab).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Pagination Notes
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Only display the first `n` items in the list, where `n` is the default number three from your settings context.
+  - If you have more than `n` items in the list, the `<Pagination />` component will add a button that, when clicked, will replace the list with the next `n` items in the list.
+  - the `<Pagination />` component will manage the “previous” and “next” buttons upon correct implementation.
