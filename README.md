@@ -6,7 +6,8 @@
 ![uml](uml.png)
 
 - reafactor to use Context
-    - moving state to App
+    - moved state to App, passed state variables down to Todo component via `useContext`
+
 - use MAntine for styling.(80% of styling done today)
 
 What isContext?
@@ -46,10 +47,10 @@ In Phase 1, we’re going to perform some refactoring of a Todo application buil
   - NOTE: The expectation to style this entire component in one day is likely unrealistic. The recommendation is to implement the required functionality, then systematically begin styling with Mantine. Match the comp image(s) as closely as possible. 80% of the design work will likely take 20% of your time. By the end of the week, being mostly there with style is the goal!
 
 __Example:__
-  ![todo-app-example](todo-app-example.png)
+  ![todo-app-example](./assets/todo-app-example.png)
 
 __Proposed File Structure:__
-![proposed-file-structure](file-structure.png)
+![proposed-file-structure](./assets/file-structure.png)
 
 ## Technical Requirements / Notes
 

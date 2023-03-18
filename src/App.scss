@@ -3,7 +3,7 @@
   --form-element-bg-color: pink;
 }
 
-.Todo {
+.Todo, .List {
  background-color:var(--form-bg-color);
  padding: 10px;
 
@@ -35,6 +35,10 @@ form > label {
 
 span{
     color:grey;
+}
+
+.List {
+
 }
 
 @media (min-width: 376px) {

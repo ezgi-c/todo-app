@@ -34,17 +34,6 @@ const Todo = (props) => {
           <button type="submit">Add Item</button>
         </label>
       </form>
-
-      {defaultUser.list.map(item => (
-        <div key={item.id}>
-          <p>{item.text}</p>
-          <p><small>Assigned to: {item.assignee}</small></p>
-          <p><small>Difficulty: {item.difficulty}</small></p>
-          <div onClick={() => props.toggleComplete(item.id)}>Complete: {item.complete.toString()}</div>
-          <hr />
-        </div>
-      ))}
-
     </div>
   );
 };
