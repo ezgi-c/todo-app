@@ -1,11 +1,11 @@
 # Lab: Class 31 - To Do List Manager
 
-- create UML after reading the code
+-x- create UML after reading the code
   - starting from the code, work backwards
 
 ![uml](uml.png)
 
-- reafactor to use Context
+-x-  reafactor to use Context
     - moved state to App, passed state variables down to Todo component via `useContext`
 
 - use MAntine for styling.(80% of styling done today)

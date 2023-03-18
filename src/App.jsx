@@ -11,12 +11,14 @@ export const UserContext = createContext("");
 const App = () => {
   const [defaultValues] = useState({
     difficulty: 4,
+    itemsPerPage:3,
+
   });
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
 
   //  - Display three items.
- //  - Hide completed items using a boolean.
+ //  -x- Hide completed items using a boolean.
  // - Define “difficulty” as a default sort word 
  // to optionally use in the stretch goal.
 
