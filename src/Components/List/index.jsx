@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import { UserContext } from "../../App";
+import { Context } from "../../App";
 import { Pagination } from "@mantine/core";
 
 const List = (props) => {
-  const defaultUser = useContext(UserContext);
+  const defaultUser = useContext(Context);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
 

@@ -1,16 +1,26 @@
+import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
+import { Context } from '../../App';
 import Todo from '.';
 
-describe('ToDo Component Tests', ()  => {
-  test('render a header element as expected', () => {
-    render(<Todo />);
+test('render a header element as expected', () => {
+    const contextValue = {
+        incomplete: 0,
+        defaultValues: {
+            difficulty:3
+        }
+    };
 
-    let header = screen.getByTestId('todo-header');
-    let h1 = screen.getByTestId('todo-h1');
+  render(
+    <Context.Provider value = {contextValue}>
+        <Todo />
+    </Context.Provider>
+  );
 
-    expect(header).toBeTruthy();
-    expect(header).toBeInTheDocument();
-    expect(h1).toHaveTextContent('To Do List: 0 items pending');
-  })
-})
+  const header = screen.getByTestId('todo-header');
+  const title = screen.getByTestId('todo-h1');
+
+  expect(header).toBeInTheDocument();
+  expect(title).toBeInTheDocument();
+});

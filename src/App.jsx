@@ -6,7 +6,7 @@ import List from "./Components/List"
 
 import useForm from "./hooks/form";
 
-export const UserContext = createContext("");
+export const Context = createContext("");
 
 const App = () => {
   const [defaultValues] = useState({
@@ -53,10 +53,10 @@ const App = () => {
   }, [list]);
 
   return (
-    <UserContext.Provider value={{ list, setList, incomplete, setIncomplete, defaultValues }}>
+    <Context.Provider value={{ list, setList, incomplete, setIncomplete, defaultValues }}>
       <Todo handleChange={handleChange} handleSubmit={handleSubmit} />;
       <List toggleComplete={toggleComplete}/>
-    </UserContext.Provider>
+    </Context.Provider>
   );
 };
 export default App;

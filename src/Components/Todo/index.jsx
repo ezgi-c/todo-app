@@ -1,9 +1,9 @@
 import React, {useContext} from 'react';
-import { UserContext } from '../../App'
+import { Context } from '../../App'
 
 const Todo = (props) => {
 
-    const defaultUser = useContext(UserContext)
+    const defaultUser = useContext(Context)
 
   return (
     <div className='Todo'>
