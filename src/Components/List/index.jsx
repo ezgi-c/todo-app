@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../../App";
-import { Pagination } from "@mantine/core";
+import { Pagination, CloseButton } from "@mantine/core";
 
 const List = (props) => {
   const defaultUser = useContext(Context);
@@ -20,7 +20,14 @@ const List = (props) => {
       <div className="List">
         {displayedList.map((item) => {
           return (
-            <div key={item.id}>
+            <div className="listItem" key={item.id}>
+              <CloseButton
+              className="deleteButton"
+                onClick={() => props.toggleComplete(item.id)}
+                title="Close popover"
+                size="xl"
+                iconSize={20}
+              />
               <p>{item.text}</p>
               <p>
                 <small>Assigned to: {item.assignee}</small>
@@ -28,17 +35,15 @@ const List = (props) => {
               <p>
                 <small>Difficulty: {item.difficulty}</small>
               </p>
-              <div onClick={() => props.toggleComplete(item.id)}>
-                Complete: {item.complete.toString()}
-              </div>
-              <hr />
+              <div>Complete: {item.complete.toString()}</div>
             </div>
           );
         })}
       </div>
       <Pagination
+        className="pagination"
         size="sm"
-        total={defaultUser.list.length/3}
+        total={defaultUser.list.length / 3}
         limit={itemsPerPage}
         value={currentPage}
         onChange={handlePageChange}

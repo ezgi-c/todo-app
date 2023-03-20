@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
 import { Context } from '../../App'
+import {Button } from '@mantine/core';
 
 const Todo = (props) => {
 
@@ -7,9 +8,6 @@ const Todo = (props) => {
 
   return (
     <div className='Todo'>
-      <header data-testid="todo-header">
-        <h1 data-testid="todo-h1">To Do List: <span>{defaultUser.incomplete} items pending</span></h1>
-      </header>
 
       <form onSubmit={props.handleSubmit}>
 
@@ -31,7 +29,7 @@ const Todo = (props) => {
         </label>
 
         <label>
-          <button type="submit">Add Item</button>
+          <Button className="button" type="submit">Add Item</Button>
         </label>
       </form>
     </div>
