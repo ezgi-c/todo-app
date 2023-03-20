@@ -1,22 +1,25 @@
 :root {
-  --form-bg-color: rgb(207, 240, 236);
-  --form-element-bg-color: pink;
+  --form-bg-color: white;
+  --form-element-bg-color: rgb(250, 244, 179);
 }
 
 .Todo, .List {
- background-color:var(--form-bg-color);
  padding: 10px;
+}
+
+.listItem {
+  // background-color: var(--form-element-bg-color);
+  border: solid;
+  margin: 5px;
+  padding: 10px;
 
 }
 
-.Todo > header {
-
-   padding-bottom: 20px;
-}
 
 form {
     padding: 10px;
   background-color: var(--form-element-bg-color);
+  border: solid;
   --columns: 1;
 
   display: grid;
@@ -30,15 +33,21 @@ form > h2 {
 
 form > label {
   display: block;
-  background-color: var(--form-element-bg-color);
+  // background-color: var(--form-element-bg-color);
 }
 
-span{
-    color:grey;
+
+.Todo, .List {
+  margin:0 4em;
+
 }
 
-.List {
+.deleteButton {
+  float: right;
+}
 
+.pagination {
+  margin:0 4em;
 }
 
 @media (min-width: 376px) {

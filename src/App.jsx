@@ -1,9 +1,9 @@
 import "./App.scss";
 import React, { createContext, useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
+import HeaderComponent from "./Components/Header/header";
 import Todo from "./Components/Todo";
-import List from "./Components/List"
-
+import List from "./Components/List";
 import useForm from "./hooks/form";
 
 export const Context = createContext("");
@@ -11,16 +11,15 @@ export const Context = createContext("");
 const App = () => {
   const [defaultValues] = useState({
     difficulty: 4,
-    itemsPerPage:3,
-
+    itemsPerPage: 3,
   });
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
 
   //  - Display three items.
- //  -x- Hide completed items using a boolean.
- // - Define “difficulty” as a default sort word 
- // to optionally use in the stretch goal.
+  //  -x- Hide completed items using a boolean.
+  // - Define “difficulty” as a default sort word
+  // to optionally use in the stretch goal.
 
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
@@ -37,10 +36,9 @@ const App = () => {
         item.complete = !item.complete;
       }
       return item;
-      
     });
 
-    setList(items.filter(item => !item.complete));
+    setList(items.filter((item) => !item.complete));
   }
 
   useEffect(() => {
@@ -53,10 +51,15 @@ const App = () => {
   }, [list]);
 
   return (
-    <Context.Provider value={{ list, setList, incomplete, setIncomplete, defaultValues }}>
-      <Todo handleChange={handleChange} handleSubmit={handleSubmit} />;
-      <List toggleComplete={toggleComplete}/>
-    </Context.Provider>
+    <>
+      <Context.Provider
+        value={{ list, setList, incomplete, setIncomplete, defaultValues }}
+      >
+        <HeaderComponent />
+        <Todo handleChange={handleChange} handleSubmit={handleSubmit} />;
+        <List toggleComplete={toggleComplete} />
+      </Context.Provider>
+    </>
   );
 };
 export default App;
