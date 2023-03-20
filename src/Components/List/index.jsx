@@ -9,7 +9,10 @@ const List = (props) => {
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const displayedList = defaultUser.list.slice(startIndex, endIndex);
+  // const displayedList = defaultUser.list.slice(startIndex, endIndex);
+  const displayedList = defaultUser.list
+    .sort((a, b) => a.difficulty - b.difficulty)
+    .slice(startIndex, endIndex);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -22,7 +25,7 @@ const List = (props) => {
           return (
             <div className="listItem" key={item.id}>
               <CloseButton
-              className="deleteButton"
+                className="deleteButton"
                 onClick={() => props.toggleComplete(item.id)}
                 title="Close popover"
                 size="xl"
