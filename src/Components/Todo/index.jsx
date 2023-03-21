@@ -14,17 +14,17 @@ const Todo = (props) => {
         <h2>Add To Do Item</h2>
 
         <label>
-          <span>To Do Item</span>
+          <span>To Do Item: </span>
           <input onChange={props.handleChange} name="text" type="text" placeholder="Item Details" />
         </label>
 
         <label>
-          <span>Assigned To</span>
+          <span>Assigned To: </span>
           <input onChange={props.handleChange} name="assignee" type="text" placeholder="Assignee Name" />
         </label>
 
         <label>
-          <span>Difficulty</span>
+          <span>Difficulty: </span>
           <input onChange={props.handleChange} defaultValue={defaultUser.defaultValues.difficulty} type="range" min={1} max={5} name="difficulty" />
         </label>
 

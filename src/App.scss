@@ -3,15 +3,33 @@
   --form-element-bg-color: rgb(250, 244, 179);
 }
 
+body {
+  background-size: 40px 40px;
+  background-image: radial-gradient(circle, #000000 1px, rgba(0, 0, 0, 0) 1px);
+}
+
 .Todo, .List {
  padding: 10px;
 }
 
+h5 {
+  color:grey;
+}
+
+.List {
+  display: grid;
+  // --columns: 3;
+  // grid-template-columns: repeat(var(--columns) 1fr);
+
+}
+
 .listItem {
-  // background-color: var(--form-element-bg-color);
+  background-color: white;
   border: solid;
   margin: 5px;
   padding: 10px;
+  min-width: 300px;
+  border-radius: 10px;
 
 }
 
@@ -37,20 +55,20 @@ form > label {
 }
 
 
-.Todo, .List {
-  margin:0 4em;
+// .Todo, .List {
+//   margin:0 4em;
 
-}
+// }
 
-.deleteButton {
+.deleteButton, .button {
   float: right;
 }
 
-.pagination {
-  margin:0 4em;
-}
+// .pagination {
+//   margin:0 4em;
+// }
 
-@media (min-width: 376px) {
+@media (min-width: 426px) {
   form {
     --columns: 2;
   }
