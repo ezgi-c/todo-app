@@ -8,19 +8,19 @@ body {
   background-image: radial-gradient(circle, #000000 1px, rgba(0, 0, 0, 0) 1px);
 }
 
-.Todo, .List {
- padding: 10px;
+.Todo,
+.List {
+  padding: 10px;
 }
 
 h5 {
-  color:grey;
+  color: grey;
 }
 
 .List {
   display: grid;
   // --columns: 3;
   // grid-template-columns: repeat(var(--columns) 1fr);
-
 }
 
 .listItem {
@@ -30,12 +30,10 @@ h5 {
   padding: 10px;
   min-width: 300px;
   border-radius: 10px;
-
 }
 
-
 form {
-    padding: 10px;
+  padding: 10px;
   background-color: var(--form-element-bg-color);
   border: solid;
   --columns: 1;
@@ -54,13 +52,13 @@ form > label {
   // background-color: var(--form-element-bg-color);
 }
 
-
 // .Todo, .List {
 //   margin:0 4em;
 
 // }
 
-.deleteButton, .button {
+.deleteButton,
+.button {
   float: right;
 }
 

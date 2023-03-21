@@ -10,7 +10,7 @@ const HeaderComponent = () => {
   return (
     <Header className="todo-header" data-testid="todo-header">
       <h1 data-testid="todo-h1">
-        To Do List 
+        To Do List
         <h5>{defaultUser.incomplete} items pending</h5>
       </h1>
     </Header>
