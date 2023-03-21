@@ -16,11 +16,6 @@ const App = () => {
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
 
-  //  - Display three items.
-  //  -x- Hide completed items using a boolean.
-  // - Define “difficulty” as a default sort word
-  // to optionally use in the stretch goal.
-
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
   function addItem(item) {
