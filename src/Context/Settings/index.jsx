@@ -6,6 +6,7 @@
 
 import React, { useState, useEffect } from "react";
 
+
 export const SettingsContext = React.createContext();
 
 function SettingsProvider(props) {
@@ -20,10 +21,8 @@ function SettingsProvider(props) {
   const [incomplete, setIncomplete] = useState([]);
 
   //  // Proxy Function
-  //  const changeName = (newName) => {
-  //   // newName = newName.toUpperCase();
-  //   setName(newName);
-  //  };
+
+  const addToList = (item) => setList([...list, item]);
 
   function toggleComplete(id) {
     const items = list.map((item) => {
@@ -45,13 +44,19 @@ function SettingsProvider(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [list]);
 
+
+
+
   let exportedSettings = {
     list,
-    setList,
+    // setList,
+    addToList,
     incomplete,
     setIncomplete,
     defaultValues,
-    toggleComplete
+    toggleComplete,
+    // handleChange,
+    // handleSubmit
   };
 
   return (

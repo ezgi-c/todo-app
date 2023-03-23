@@ -1,12 +1,10 @@
 import React, { useState, useContext } from "react";
-// import { Context } from "../../App";
 import { SettingsContext } from '../../Context/Settings';
 
 import { Pagination, CloseButton } from "@mantine/core";
 
 const List = (props) => {
 
-  // const defaultUser = useContext(Context);
   const settings = useContext(SettingsContext);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,7 +12,6 @@ const List = (props) => {
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  // const displayedList = defaultUser.list.slice(startIndex, endIndex);
   const displayedList = settings.list
     .sort((a, b) => a.difficulty - b.difficulty)
     .slice(startIndex, endIndex);
