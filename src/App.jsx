@@ -1,12 +1,13 @@
 import "./App.scss";
-import React, { createContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
-import HeaderComponent from "./Components/Header/header";
-import Todo from "./Components/Todo";
+import HeaderComponent from "./Components/Header/";
+import Todo from "./Components/Todo/";
 import List from "./Components/List";
 import useForm from "./hooks/form";
 
-export const Context = createContext("");
+import { SettingsContext } from "./Context/Settings";
+// export const Context = createContext("");
 
 const App = () => {
   const [defaultValues] = useState({
@@ -46,15 +47,15 @@ const App = () => {
   }, [list]);
 
   return (
-    <>
-      <Context.Provider
+    <SettingsContext>
+      {/* <Context.Provider
         value={{ list, setList, incomplete, setIncomplete, defaultValues }}
-      >
+      > */}
         <HeaderComponent />
         <Todo handleChange={handleChange} handleSubmit={handleSubmit} />;
         <List toggleComplete={toggleComplete} />
-      </Context.Provider>
-    </>
+      {/* </Context.Provider> */}
+    </SettingsContext>
   );
 };
 export default App;

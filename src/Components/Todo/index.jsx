@@ -1,9 +1,22 @@
 import React, { useContext } from "react";
-import { Context } from "../../App";
+
+// import { Context } from "../../App";
+import { SettingsContext } from '../../Context/Settings';
+
 import { Button } from "@mantine/core";
 
 const Todo = (props) => {
-  const defaultUser = useContext(Context);
+  const settings = useContext(SettingsContext);
+
+  // const handleChange = (e) => {
+  //   let value = e.target.value;
+  //   settings.changeName(value);
+  // }
+
+  // // noop
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  // }
 
   return (
     <div className="Todo">
@@ -34,7 +47,7 @@ const Todo = (props) => {
           <span>Difficulty: </span>
           <input
             onChange={props.handleChange}
-            defaultValue={defaultUser.defaultValues.difficulty}
+            defaultValue={settings.defaultValues.difficulty}
             type="range"
             min={1}
             max={5}

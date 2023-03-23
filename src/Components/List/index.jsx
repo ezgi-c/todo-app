@@ -1,16 +1,21 @@
-import React, { useContext, useState } from "react";
-import { Context } from "../../App";
+import React, { useState, useContext } from "react";
+// import { Context } from "../../App";
+import { SettingsContext } from '../../Context/Settings';
+
 import { Pagination, CloseButton } from "@mantine/core";
 
 const List = (props) => {
-  const defaultUser = useContext(Context);
+
+  // const defaultUser = useContext(Context);
+  const settings = useContext(SettingsContext);
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   // const displayedList = defaultUser.list.slice(startIndex, endIndex);
-  const displayedList = defaultUser.list
+  const displayedList = settings.list
     .sort((a, b) => a.difficulty - b.difficulty)
     .slice(startIndex, endIndex);
 
@@ -26,7 +31,7 @@ const List = (props) => {
             <div className="listItem" key={item.id}>
               <CloseButton
                 className="deleteButton"
-                onClick={() => props.toggleComplete(item.id)}
+                onClick={() => settings.toggleComplete(item.id)}
                 title="Close popover"
                 size="xl"
                 iconSize={20}
@@ -46,7 +51,7 @@ const List = (props) => {
       <Pagination
         className="pagination"
         size="sm"
-        total={defaultUser.list.length / 3}
+        total={settings.list.length / 3}
         limit={itemsPerPage}
         value={currentPage}
         onChange={handlePageChange}
