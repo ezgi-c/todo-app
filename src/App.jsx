@@ -7,7 +7,7 @@ import Header from "./Components/Header";
 import Todo from "./Components/Todo";
 import List from "./Components/List";
 
-import { SettingsContext } from "./Context/Settings";
+import SettingsContext from "./Context/Settings";
 
 const App = () => {
   

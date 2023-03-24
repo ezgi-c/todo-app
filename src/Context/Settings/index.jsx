@@ -49,14 +49,11 @@ function SettingsProvider(props) {
 
   let exportedSettings = {
     list,
-    // setList,
     addToList,
     incomplete,
     setIncomplete,
     defaultValues,
     toggleComplete,
-    // handleChange,
-    // handleSubmit
   };
 
   return (
