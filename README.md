@@ -1,3 +1,62 @@
+# Lab: Class 32 - Context API - Behaviors
+
+- read the assignment.
+- list the requirements in Readme
+- update UML
+- create task list
+
+__bug: page only displays if there are 3 items in the page. not at 1 or 2 items.__
+
+__To Do List Manager Phase 2:__ Incorporate configuration settings to the application.
+
+## Phase 2 Requirements:
+
+- We will let the user make changes to 2 settings:
+
+  - How many To Do Items to show at once.
+  - Whether or not to show completed items.
+  - Implement the Context API to make some basic application settings available to components.
+- Provide the users with a form where they can change the values for those settings:
+  - the form should be in a new component, linked from the main navigation
+  - _Hint: Use Browser Router to create the page/route/component for this._
+  - Once settings are updated, render the updated settings to the right of the “form”. Consider using `<Grid />`, `<Card />`, and `<When />` components.
+- Save the users choices in Local Storage.
+- Retrieve their preferences from Local Storage and apply them to the application on startup.
+
+## Technical Requirements / Notes:
+
+_Technical requirements for the core application are unchanged from the prior phases, with the addition of context behaviors defined in our global Context Provider._
+
+1. Extend your `context` provider to include all of the following features:
+
+- Create a `context` for managing application settings and provide this at the application level.
+  - Display or Hide completed items (boolean).
+  - Number of items to display per screen (number).
+  - Default sort field (string).
+  - Create a function in your context that saves user preferences (for the above) to local storage.
+  - Implement a `useEffect()` (or `componentDidMount()`) in your context to read from local storage and set the values for those 2 state properties on application load.  
+  _Note: You will need to `stringify()` your state prior to saving to local storage, and parse it when you retrieve it._
+
+2. Consume and utilize Context values throughout your components:
+
+- Show a maximum of a certain number of items per screen in the `<List />` component.
+  - Properly implement the Mantine `<Pagination />` component functionality to let the users navigate a long list of items with the correct number of tasks showing per “page”.
+- Hide or show completed items in the list.
+
+
+## Testing
+
+- Tests should assert all behavioral functionality.
+- Do a deep mount of the app, and set tests to make assertions on the child components that consume context from the Provider.
+  - Can they see context?
+
+__Stretch Goal:__  
+
+- Sort the items based on any of the keys (i.e. difficulty).
+- Update the state handling for todo items to use `useReducer()` vs separate state management methods.
+
+--------------
+
 # Lab: Class 31 - To Do List Manager
 
 A Web Application for securely managing a To Do List.
@@ -30,7 +89,7 @@ After refactor:
 
 ![uml2](uml2.png)
 
-## Proposed File Structure:
+## Proposed File Structure
 
 ![proposed-file-structure](./assets/file-structure.png)
 
@@ -48,8 +107,6 @@ After refactor:
 
 __Example:__
   ![todo-app-example](./assets/todo-app-example.png)
-
-
 
 ## Technical Requirements / Notes
 
