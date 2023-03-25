@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 
 import { Header } from "@mantine/core";
 import "./header.scss";
-// import { Context } from "../../App";
 import { SettingsContext } from "../../Context/Settings";
 
 const HeaderComponent = () => {

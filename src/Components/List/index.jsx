@@ -1,14 +1,13 @@
 import React, { useState, useContext } from "react";
-import { SettingsContext } from '../../Context/Settings';
+import { SettingsContext } from "../../Context/Settings";
 
 import { Pagination, CloseButton } from "@mantine/core";
 
 const List = (props) => {
-
   const settings = useContext(SettingsContext);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3;
+  const itemsPerPage = settings.itemsPerPage;
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -33,7 +32,13 @@ const List = (props) => {
                 size="xl"
                 iconSize={20}
               />
-              <p>{item.text}</p>
+              <p
+                style={{
+                  textDecoration: item.complete ? "line-through" : "none",
+                }}
+              >
+                {item.text}
+              </p>
               <p>
                 <small>Assigned to: {item.assignee}</small>
               </p>
@@ -48,7 +53,7 @@ const List = (props) => {
       <Pagination
         className="pagination"
         size="sm"
-        total={settings.list.length / 3}
+        total={displayedList.length}
         limit={itemsPerPage}
         value={currentPage}
         onChange={handlePageChange}

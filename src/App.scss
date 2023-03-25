@@ -17,6 +17,18 @@ h5 {
   color: grey;
 }
 
+.settings {
+  color: blue;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.settings:hover {
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .List {
   display: grid;
   // --columns: 3;
