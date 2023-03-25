@@ -9,7 +9,7 @@ export const SettingsContext = React.createContext();
 function SettingsProvider(props) {
 
   const [defaultValues] = useState({
-    difficulty: 4,
+    difficulty: 3,
   });
 
   const [itemsPerPage, setItemsPerPage] = useState(3);
@@ -56,7 +56,8 @@ function SettingsProvider(props) {
   }
 
   useEffect(() => {
-    let incompleteCount = list.filter((item) => !item.complete).length;
+    let sortedList = list.sort((a,b) => a.difficulty - b.difficulty);
+    let incompleteCount = sortedList.filter((item) => !item.complete).length;
     setIncomplete(incompleteCount);
     document.title = `To Do List: ${incomplete}`;
     // linter will want 'incomplete' added to dependency array unnecessarily.

@@ -11,9 +11,7 @@ const List = (props) => {
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const displayedList = settings.list
-    .sort((a, b) => a.difficulty - b.difficulty)
-    .slice(startIndex, endIndex);
+  const displayedList = settings.list.slice(startIndex, endIndex);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -32,20 +30,20 @@ const List = (props) => {
                 size="xl"
                 iconSize={20}
               />
-              <p
+              <div
                 style={{
                   textDecoration: item.complete ? "line-through" : "none",
                 }}
               >
-                {item.text}
-              </p>
-              <p>
-                <small>Assigned to: {item.assignee}</small>
-              </p>
-              <p>
-                <small>Difficulty: {item.difficulty}</small>
-              </p>
-              <div>Complete: {item.complete.toString()}</div>
+                <h4>{item.text}</h4>
+                <p>
+                  <small>Assigned to: {item.assignee}</small>
+                </p>
+                <p>
+                  <small>Difficulty: {item.difficulty}</small>
+                </p>
+                <div>Complete: {item.complete.toString()}</div>
+              </div>
             </div>
           );
         })}
@@ -53,7 +51,7 @@ const List = (props) => {
       <Pagination
         className="pagination"
         size="sm"
-        total={displayedList.length}
+        total={settings.list.length / itemsPerPage + 1}
         limit={itemsPerPage}
         value={currentPage}
         onChange={handlePageChange}
