@@ -21,7 +21,7 @@ function SettingsForm(props) {
 
   return (
     <Modal onClose={props.handleCloseModal} opened={props.showModal}>
-      <form onSubmit={handleSubmit}>
+      <form className='settingsModal' onSubmit={handleSubmit}>
         <div>
           <label>
             <span>How Many Items per Page?</span>
