@@ -42,17 +42,13 @@ h5 {
   padding: 20px;
   width: 200px;
   height: 200px;
-
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 form {
   padding: 20px;
   background-color: white;
-  // border: solid gray;
   box-shadow: 2px 2px gray;
-
-  // background-color: var(--form-element-bg-color);
   --columns: 1;
   display: grid;
   grid-template-columns: repeat(var(--columns) 1fr);
@@ -65,13 +61,7 @@ form > h2 {
 
 form > label {
   display: block;
-  // background-color: var(--form-element-bg-color);
 }
-
-// .Todo, .List {
-//   margin:0 4em;
-
-// }
 
 .deleteButton,
 .button {
