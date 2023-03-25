@@ -1,15 +1,44 @@
-# Lab: Class 32 - Context API - Behaviors
+# Lab: Class 33 - `<Login />` and `<Auth />`
 
-- read the assignment.
-- list the requirements in Readme
-- update UML
-- create task list
+__To Do List Manager Phase 3:__ Adding security and access controls to the application.
 
-__bug: page only displays if there are 3 items in the page. not at 1 or 2 items.__
+## Phase 3 Requirements
+
+In Phase 3, we’d like to extend the functionality of the application by requiring users be logged in to view items and also restrict access based on user type. The user stories from __Phases 1, and 2__ remain unchanged. For this phase, we are now adding the following new user stories.
+
+- As a user, I want to provide a way for all users to login to their account.
+- As a user, I want to make sure that my To Do items are only viewable to users that have logged in with a valid account.
+- As a user, I want to ensure that only fellow users that are allowed to “create”, based on their user type, can add new To Do Items.
+- As a user, I want to ensure that only fellow users that are allowed to “update”, based on their user type, can mark To Do Items complete.
+- As a user, I want to ensure that only fellow users that are allowed to “delete”, based on their user type, can delete new To Do Items.
+
+
+
+
+
+## Login/Auth Components and API
+
+You have been provided, in the `starter-code` folder, a sample application built using the `<Login />` and `<Auth />` components built during class. Get this running first, and analyze it. You will need these components to complete the Authentication tasks specified above.
+
+- Convert the `Auth/Context.js` Context Provider to be a function, rather than a class.
+- Convert the `<Login />` and `<Auth />` components to be implemented as ‘function’ components instead of ‘class’ components.
+
+Once you have a working practice app, extract the Login Context and relevant components from it and incorporate them into your To Do application, implementing Authentication and Authorization as described in the requirements above.
+
+## Testing
+
+- Write unit tests for the Login Context Component.
+- Write unit tests for the Login/Auth components.
+  - Hide/Show based on status.
+- You will need to create some mocking interface to fake a server/login to simulate.
+- Tests should assert all behavioral functionality.
+
+--------------
+<!-- # Lab: Class 32 - Context API - Behaviors
 
 __To Do List Manager Phase 2:__ Incorporate configuration settings to the application.
 
-## Phase 2 Requirements:
+## Phase 2 Requirements
 
 - We will let the user make changes to 2 settings:
 
@@ -130,4 +159,4 @@ __2. Consume and utilize `context` values throughout your components.__
 
 - Only display the first `n` items in the list, where `n` is the default number three from your settings context.
   - If you have more than `n` items in the list, the `<Pagination />` component will add a button that, when clicked, will replace the list with the next `n` items in the list.
-  - the `<Pagination />` component will manage the “previous” and “next” buttons upon correct implementation.
+  - the `<Pagination />` component will manage the “previous” and “next” buttons upon correct implementation. -->

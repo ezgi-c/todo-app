@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { SettingsContext } from "../../Context/Settings";
+import Auth from "../Auth";
 
 import { Pagination, CloseButton } from "@mantine/core";
 
@@ -23,13 +24,17 @@ const List = (props) => {
         {displayedList.map((item) => {
           return (
             <div className="listItem" key={item.id}>
-              <CloseButton
-                className="deleteButton"
-                onClick={() => settings.toggleComplete(item.id)}
-                title="Close popover"
-                size="xl"
-                iconSize={20}
-              />
+              <Auth capability="update">
+                <Auth capability="delete">
+                  <CloseButton
+                    className="deleteButton"
+                    onClick={() => settings.toggleComplete(item.id)}
+                    title="Close popover"
+                    size="xl"
+                    iconSize={20}
+                  />
+                </Auth>
+              </Auth>
               <div
                 style={{
                   textDecoration: item.complete ? "line-through" : "none",
