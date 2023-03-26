@@ -1,99 +1,84 @@
-import React from 'react';
-import jwt_decode from 'jwt-decode';
+import React, { useState, useEffect } from "react";
+// import React from "react";
 
-const testUsers = {
-  Administrator: {
-    password: 'admin',
-    name: 'Administrator',
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRtaW5pc3RyYXRvciIsInJvbGUiOiJhZG1pbiIsImNhcGFiaWxpdGllcyI6IlsnY3JlYXRlJywncmVhZCcsJ3VwZGF0ZScsJ2RlbGV0ZSddIiwiaWF0IjoxNTE2MjM5MDIyfQ.pAZXAlTmC8fPELk2xHEaP1mUhR8egg9TH5rCyqZhZkQ'
-  },
-  Editor: {
-    password: 'editor',
-    name: 'Editor',
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWRpdG9yIiwicm9sZSI6ImVkaXRvciIsImNhcGFiaWxpdGllcyI6IlsncmVhZCcsJ3VwZGF0ZSddIiwiaWF0IjoxNTE2MjM5MDIyfQ.3aDn3e2pf_J_1rZig8wj9RiT47Ae2Lw-AM-Nw4Tmy_s'
-  },
-  Writer: {
-    password: 'writer',
-    name: 'Writer',
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiV3JpdGVyIiwicm9sZSI6IndyaXRlciIsImNhcGFiaWxpdGllcyI6IlsnY3JlYXRlJ10iLCJpYXQiOjE1MTYyMzkwMjJ9.dmKh8m18mgQCCJp2xoh73HSOWprdwID32hZsXogLZ68'
-  },
-  User: {
-    password: 'user',
-    name: 'User',
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXNlciIsInJvbGUiOiJ1c2VyIiwiY2FwYWJpbGl0aWVzIjoiWydyZWFkJ10iLCJpYXQiOjE1MTYyMzkwMjJ9.WXYvIKLdPz_Mm0XDYSOJo298ftuBqqjTzbRvCpxa9Go'
-  },
-};
+import jwt_decode from "jwt-decode";
+
+import { testUsers } from "./testUsers";
 
 export const LoginContext = React.createContext();
 
-class LoginProvider extends React.Component {
+function LoginProvider(props) {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [token, setToken] = useState(null);
+  const [user, setUser] = useState({ capabilities: [] });
+  const [error, setError] = useState(null);
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     loggedIn: false,
+  //     token: null,
+  //     user: { capabilities: [] },
+  //     login: this.login,
+  //     logout: this.logout,
+  //     can: this.can,
+  //   };
+  // }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      loggedIn: false,
-      token: null,
-      user: { capabilities: [] },
-      login: this.login,
-      logout: this.logout,
-      can: this.can
-    };
-  }
-
-  login = ( username, password ) => {
-
+  const login = (username, password) => {
     // let { loggedIn, user, token } = this.state;
 
     let validUser = testUsers[username];
 
-    if( validUser && validUser.password === password ) {
-       try {
-         this.validateToken(validUser.token);
-       } catch(e) {
-         this.setLoginState( false, null, {}, e.message );
-       }
+    if (validUser && validUser.password === password) {
+      try {
+        validateToken(validUser.token);
+      } catch (e) {
+        setLoginState(false, null, {}, e.message);
+      }
     } else {
-       this.setLoginState( false, null, {}, { message: "Invalid User"} );
+      setLoginState(false, null, {}, { message: "Invalid User" });
     }
+  };
 
-  }
-
-  validateToken = (token) => {
+  const validateToken = (token) => {
     try {
       let validUser = jwt_decode(token);
-      this.setLoginState( true, token, validUser );
-    } catch(e) {
-      this.setLoginState( false, null, {}, e.message );
+      setLoginState(true, token, validUser);
+    } catch (e) {
+      setLoginState(false, null, {}, e.message);
     }
-  }
+  };
 
-  setLoginState = (loggedIn, token, user, error) => {
-    this.setState( {loggedIn, token, user, error } );
-    localStorage.setItem( 'auth', token );
-  }
+  const setLoginState = (loggedIn, token, user, error) => {
+    // this.setState({ loggedIn, token, user, error });
+    setLoggedIn(loggedIn);
+    setToken(token);
+    setUser(user);
+    setError(error);
+    localStorage.setItem("auth", token);
+  };
 
-  logout = () => {
-      this.setLoginState( false, null, {} );
-  }
+  const logout = () => {
+    setLoginState(false, null, {});
+  };
 
-  can = (capability) => {
-      console.log(this?.state?.user?.capabilities)
-    return this?.state?.user?.capabilities?.includes(capability);
-  }
+  const can = (capability) => {
+    // console.log(user?.capabilities);
+    return user?.capabilities?.includes(capability);
+  };
 
-  componentDidMount() {
-    const token = localStorage.getItem('auth');
-    this.validateToken(token);
-  }
+  useEffect(() => {
+    const token = localStorage.getItem("auth");
+    validateToken(token);
+    // eslint-disable-next-line
+  }, []);
 
-  render() {
-    return (
-      <LoginContext.Provider value={this.state}>
-        {this.props.children}
-      </LoginContext.Provider>
-    )
-  }
-
+  const state = { loggedIn, token, user, login, logout, can, error };
+  return (
+    <LoginContext.Provider value={state}>
+      {props.children}
+    </LoginContext.Provider>
+  );
 }
 
 export default LoginProvider;
