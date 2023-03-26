@@ -19,11 +19,11 @@ const App = () => {
         <MantineProvider withGlobalStyles withNormalizeCSS>
           <Header />
           <Login />
+            <Auth capability="read">
           <Auth capability="create">
             <Todo />;
-            <Auth>
-              <List />
             </Auth>
+              <List />
           </Auth>
         </MantineProvider>
       </SettingsContext>

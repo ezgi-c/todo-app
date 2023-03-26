@@ -56,6 +56,8 @@ function LoginProvider(props) {
     setUser(user);
     setError(error);
     localStorage.setItem("auth", token);
+    console.log(user?.capabilities);
+
   };
 
   const logout = () => {
@@ -63,7 +65,6 @@ function LoginProvider(props) {
   };
 
   const can = (capability) => {
-    // console.log(user?.capabilities);
     return user?.capabilities?.includes(capability);
   };
 

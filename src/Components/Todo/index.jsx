@@ -21,7 +21,7 @@ const Todo = (props) => {
   function addItem(item) {
     item.id = uuid();
     item.complete = false;
-    console.log(item);
+    // console.log(item);
     settings.addToList(item);
   }
 
