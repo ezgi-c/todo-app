@@ -25,7 +25,6 @@ const List = (props) => {
           return (
             <div className="listItem" key={item.id}>
               <Auth capability="update">
-                <Auth capability="delete">
                   <CloseButton
                     className="deleteButton"
                     onClick={() => settings.toggleComplete(item.id)}
@@ -33,22 +32,23 @@ const List = (props) => {
                     size="xl"
                     iconSize={20}
                   />
-                </Auth>
               </Auth>
-              <div
-                style={{
-                  textDecoration: item.complete ? "line-through" : "none",
-                }}
-              >
-                <h4>{item.text}</h4>
-                <p>
-                  <small>Assigned to: {item.assignee}</small>
-                </p>
-                <p>
-                  <small>Difficulty: {item.difficulty}</small>
-                </p>
-                <div>Complete: {item.complete.toString()}</div>
-              </div>
+              <Auth capability="read">
+                <div
+                  style={{
+                    textDecoration: item.complete ? "line-through" : "none",
+                  }}
+                >
+                  <h4>{item.text}</h4>
+                  <p>
+                    <small>Assigned to: {item.assignee}</small>
+                  </p>
+                  <p>
+                    <small>Difficulty: {item.difficulty}</small>
+                  </p>
+                  <div>Complete: {item.complete.toString()}</div>
+                </div>
+              </Auth>
             </div>
           );
         })}
