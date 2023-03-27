@@ -14,7 +14,7 @@ function SettingsProvider(props) {
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [showCompleted, setShowCompleted] = useState(false);
 
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(JSON.parse(localStorage.getItem("list")));
   const [incomplete, setIncomplete] = useState([]);
 
   // Proxy Function
@@ -33,11 +33,18 @@ function SettingsProvider(props) {
   useEffect(() => {
     let savedItemsPerPage = localStorage.getItem("itemsPerPage");
     let savedShowCompleted = JSON.parse(localStorage.getItem("showCompleted"));
+    let savedList = JSON.parse(localStorage.getItem("list"));
+
+    setList(savedList);
     changeItemsPerPage(savedItemsPerPage);
     changeShowCompleted(savedShowCompleted);
   }, []);
 
   const addToList = (item) => setList([...list, item]);
+
+  useEffect(() => {
+    localStorage.setItem("list", JSON.stringify(list));
+  }, [list]);
 
   function toggleComplete(id) {
     const items = list.map((item) => {
@@ -54,7 +61,7 @@ function SettingsProvider(props) {
   }
 
   useEffect(() => {
-    let sortedList = list.sort((a, b) => a.difficulty - b.difficulty);
+    let sortedList = list?.sort((a, b) => a.difficulty - b.difficulty) || [];
     let incompleteCount = sortedList.filter((item) => !item.complete).length;
     setIncomplete(incompleteCount);
     document.title = `To Do List: ${incomplete}`;
