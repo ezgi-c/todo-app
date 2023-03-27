@@ -63,7 +63,7 @@ function LoginProvider(props) {
   };
 
   const can = (capability) => {
-    // console.log(user?.capabilities);
+    console.log(user?.capabilities);
     return user?.capabilities?.includes(capability);
   };
 
