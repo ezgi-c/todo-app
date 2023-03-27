@@ -1,38 +1,42 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import {If, Then, Else} from 'react-if';
 import {LoginContext} from '../../Context/Auth/';
 
-class Login extends React.Component {
+function Login (props) {
 
-  static contextType = LoginContext;
+  const context = useContext(LoginContext);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      password: ''
-    };
-  }
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
-  handleSubmit = (e) => {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     username: '',
+  //     password: ''
+  //   };
+  // }
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    this.context.login( this.state.username, this.state.password);
+    context.login( username, password);
   }
 
-  handleChange = (e) => {
-    this.setState( { [e.target.name] :e.target.value } );
+  const handleChange = (e) => {
+    e.target.name === "username" && setUsername(e.target.value);
+    e.target.name === "password" && setPassword(e.target.value);
+    // this.setState( { [e.target.name] :e.target.value } );
   }
 
-  render() {
       return (
-        <If condition = {this.context.loggedIn}>
+        <If condition = {context.loggedIn}>
           <Then>
-              <button onClick={this.context.logout}>Log Out</button>
+              <button onClick={context.logout}>Log Out</button>
           </Then>
           <Else>
-              <form className= "loginForm" onSubmit={this.handleSubmit}>
-                <input name="username" onChange={this.handleChange} placeholder="login id" />
-                <input name="password" onChange={this.handleChange} type="password" placeholder="password" />
+              <form className= "loginForm" onSubmit={handleSubmit}>
+                <input name="username" onChange={handleChange} placeholder="login id" />
+                <input name="password" onChange={handleChange} type="password" placeholder="password" />
                 <button>Login</button>
               </form>
           </Else>
@@ -40,6 +44,6 @@ class Login extends React.Component {
       )
   }
 
-}
+
 
 export default Login;
