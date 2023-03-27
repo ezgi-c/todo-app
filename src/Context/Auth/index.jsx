@@ -4,7 +4,6 @@ import jwt_decode from "jwt-decode";
 
 import { testUsers } from "./testUsers";
 
-
 export const LoginContext = React.createContext();
 
 function LoginProvider(props) {
@@ -12,21 +11,8 @@ function LoginProvider(props) {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState({ capabilities: [] });
   const [error, setError] = useState(null);
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     loggedIn: false,
-  //     token: null,
-  //     user: { capabilities: [] },
-  //     login: this.login,
-  //     logout: this.logout,
-  //     can: this.can,
-  //   };
-  // }
 
   const login = (username, password) => {
-    // let { loggedIn, user, token } = this.state;
-
     let validUser = testUsers[username];
 
     if (validUser && validUser.password === password) {
@@ -50,7 +36,6 @@ function LoginProvider(props) {
   };
 
   const setLoginState = (loggedIn, token, user, error) => {
-    // this.setState({ loggedIn, token, user, error });
     setLoggedIn(loggedIn);
     setToken(token);
     setUser(user);

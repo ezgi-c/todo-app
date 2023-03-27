@@ -7,7 +7,6 @@ import React, { useState, useEffect } from "react";
 export const SettingsContext = React.createContext();
 
 function SettingsProvider(props) {
-
   const [defaultValues] = useState({
     difficulty: 3,
   });
@@ -50,13 +49,12 @@ function SettingsProvider(props) {
     if (!showCompleted) {
       setList(items.filter((item) => !item.complete));
     } else {
-
-      setList(items)
+      setList(items);
     }
   }
 
   useEffect(() => {
-    let sortedList = list.sort((a,b) => a.difficulty - b.difficulty);
+    let sortedList = list.sort((a, b) => a.difficulty - b.difficulty);
     let incompleteCount = sortedList.filter((item) => !item.complete).length;
     setIncomplete(incompleteCount);
     document.title = `To Do List: ${incomplete}`;

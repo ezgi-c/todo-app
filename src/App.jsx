@@ -19,9 +19,9 @@ const App = () => {
         <MantineProvider withGlobalStyles withNormalizeCSS>
           <Header />
           <Login />
-            <Auth capability="create">
-              <Todo />;
-            </Auth>
+          <Auth capability="create">
+            <Todo />;
+          </Auth>
           <Auth capability="read">
             <List />
           </Auth>
