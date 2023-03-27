@@ -25,13 +25,13 @@ const List = (props) => {
           return (
             <div className="listItem" key={item.id}>
               <Auth capability="update">
-                  <CloseButton
-                    className="deleteButton"
-                    onClick={() => settings.toggleComplete(item.id)}
-                    title="Close popover"
-                    size="xl"
-                    iconSize={20}
-                  />
+                <CloseButton
+                  className="deleteButton"
+                  onClick={() => settings.toggleComplete(item.id)}
+                  title="Close popover"
+                  size="xl"
+                  iconSize={20}
+                />
               </Auth>
               <Auth capability="read">
                 <div
