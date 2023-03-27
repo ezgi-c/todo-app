@@ -62,7 +62,7 @@ function SettingsProvider(props) {
   }
 
   useEffect(() => {
-    let sortedList = list.sort((a, b) => a.difficulty - b.difficulty);
+    let sortedList = list?.sort((a, b) => a.difficulty - b.difficulty) || [];
     let incompleteCount = sortedList.filter((item) => !item.complete).length;
     setIncomplete(incompleteCount);
     document.title = `To Do List: ${incomplete}`;
