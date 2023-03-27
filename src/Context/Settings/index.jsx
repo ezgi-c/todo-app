@@ -14,7 +14,7 @@ function SettingsProvider(props) {
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [showCompleted, setShowCompleted] = useState(false);
 
-  const [list, setList] = useState(JSON.parse(localStorage.getItem('list')));
+  const [list, setList] = useState(JSON.parse(localStorage.getItem("list")));
   const [incomplete, setIncomplete] = useState([]);
 
   // Proxy Function
@@ -33,9 +33,9 @@ function SettingsProvider(props) {
   useEffect(() => {
     let savedItemsPerPage = localStorage.getItem("itemsPerPage");
     let savedShowCompleted = JSON.parse(localStorage.getItem("showCompleted"));
-    let savedList = JSON.parse(localStorage.getItem('list'));
+    let savedList = JSON.parse(localStorage.getItem("list"));
 
-    setList(savedList)
+    setList(savedList);
     changeItemsPerPage(savedItemsPerPage);
     changeShowCompleted(savedShowCompleted);
   }, []);
@@ -45,7 +45,6 @@ function SettingsProvider(props) {
   useEffect(() => {
     localStorage.setItem("list", JSON.stringify(list));
   }, [list]);
-  
 
   function toggleComplete(id) {
     const items = list.map((item) => {
@@ -70,8 +69,6 @@ function SettingsProvider(props) {
     // disable code used to avoid linter warning
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [list]);
-
-  
 
   let exportedSettings = {
     list,
