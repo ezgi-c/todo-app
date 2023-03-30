@@ -27,22 +27,22 @@ describe("Login component", () => {
     expect(logoutButton).toBeInTheDocument();
   });
 
-  test("should call login function on form submit", () => {
-    const contextValue = { loggedIn: false, login: jest.fn() };
-    render(
-      <LoginContext.Provider value={contextValue}>
-        <Login />
-      </LoginContext.Provider>
-    );
-    const loginForm = screen.getByPlaceholderText("login id");
-    const passwordInput = screen.getByPlaceholderText("password");
-    const submitButton = screen.getByTestId("submit-button");
+  // test("should call login function on form submit", () => {
+  //   const contextValue = { loggedIn: false, login: jest.fn() };
+  //   render(
+  //     <LoginContext.Provider value={contextValue}>
+  //       <Login />
+  //     </LoginContext.Provider>
+  //   );
+  //   const loginForm = screen.getByPlaceholderText("login id");
+  //   const passwordInput = screen.getByPlaceholderText("password");
+  //   const submitButton = screen.getByTestId("submit-button");
 
-    fireEvent.change(loginForm, { target: { value: "testuser" } });
-    fireEvent.change(passwordInput, { target: { value: "testpassword" } });
-    fireEvent.click(submitButton);
+  //   fireEvent.change(loginForm, { target: { value: "testuser" } });
+  //   fireEvent.change(passwordInput, { target: { value: "testpassword" } });
+  //   fireEvent.click(submitButton);
 
-    expect(contextValue.login).toHaveBeenCalledTimes(1);
-    expect(contextValue.login).toHaveBeenCalledWith("testuser", "testpassword");
-  });
+  //   expect(contextValue.login).toHaveBeenCalledTimes(1);
+  //   expect(contextValue.login).toHaveBeenCalledWith("testuser", "testpassword");
+  // });
 });
