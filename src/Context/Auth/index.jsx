@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 
 import jwt_decode from "jwt-decode";
 
-import { testUsers } from "./testUsers";
+import axios from "axios";
+
+// import { testUsers } from "./testUsers";
 
 export const LoginContext = React.createContext();
 
@@ -12,12 +14,25 @@ function LoginProvider(props) {
   const [user, setUser] = useState({ capabilities: [] });
   const [error, setError] = useState(null);
 
-  const login = (username, password) => {
-    let validUser = testUsers[username];
+  const login = async (username, password) => {
+    let url = process.env.REACT_APP_API;
 
-    if (validUser && validUser.password === password) {
+    const axiosRequest = {
+      url: `${url}/signin`,
+      method: "post",
+      auth: {
+        username,
+        password,
+      },
+    };
+    let response = await axios(axiosRequest);
+    const { token } = response.data;
+
+    // let validUser = testUsers[username];
+
+    if (token) {
       try {
-        validateToken(validUser.token);
+        validateToken(token);
       } catch (e) {
         setLoginState(false, null, {}, e.message);
       }

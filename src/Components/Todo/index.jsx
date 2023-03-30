@@ -22,7 +22,7 @@ const Todo = (props) => {
     item.id = uuid();
     item.complete = false;
     console.log(item);
-    settings.addToList(item);
+    props.handleAddItem(item);
   }
 
   const { handleChange, handleSubmit } = useForm(
