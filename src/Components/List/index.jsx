@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import { SettingsContext } from "../../Context/Settings";
 import Auth from "../Auth";
-
 import { Pagination, CloseButton } from "@mantine/core";
+import axios from "axios";
 
 const List = ({ items, setItems }) => {
   const settings = useContext(SettingsContext);
@@ -18,12 +18,32 @@ const List = ({ items, setItems }) => {
     setCurrentPage(newPage);
   };
 
-  const toggleComplete = (item) => {
-    item.complete = !item.complete;
+  const toggleComplete = async (item) => {
     // axios.put
     // url: api/v1/todo/item._id
     // data: item
-    // update in state
+    const url = `${process.env.REACT_APP_API}/api/v1/todo/${item._id}`;
+
+    try {
+      const response = await axios.put(url, {
+        ...item,
+        complete: !item.complete,
+      });
+
+      // item.complete = !item.complete;
+
+      // update in state
+      const updatedItems = items.map((i) =>
+        i._id === item._id ? { ...item, complete: !item.complete } : i
+      );
+
+      setItems(
+        settings.showCompleted ? updatedItems : updatedItems.filter((i) => !i.complete)
+      );
+      console.log(response.data);
+    } catch (e) {
+      console.error(e.message);
+    }
   };
 
   useEffect(() => {
@@ -38,14 +58,17 @@ const List = ({ items, setItems }) => {
           return (
             <div className="listItem" key={item._id}>
               <Auth capability="update">
-                <CloseButton
-                  className="deleteButton"
-                  onClick={() => toggleComplete(item)}
-                  title="Close popover"
-                  size="xl"
-                  iconSize={20}
-                />
+                <Auth capability="delete">
+                  <CloseButton
+                    className="deleteButton"
+                    onClick={() => toggleComplete(item)}
+                    title="Close popover"
+                    size="xl"
+                    iconSize={20}
+                  />
+                </Auth>
               </Auth>
+
               <Auth capability="read">
                 <div
                   style={{
