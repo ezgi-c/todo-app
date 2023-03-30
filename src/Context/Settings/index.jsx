@@ -14,8 +14,8 @@ function SettingsProvider(props) {
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [showCompleted, setShowCompleted] = useState(false);
 
-  const [list, setList] = useState(JSON.parse(localStorage.getItem("list")));
-  const [incomplete, setIncomplete] = useState([]);
+  let items = props.items;
+  let setItems = props.setItems;
 
   // Proxy Function
 
@@ -33,53 +33,24 @@ function SettingsProvider(props) {
   useEffect(() => {
     let savedItemsPerPage = localStorage.getItem("itemsPerPage");
     let savedShowCompleted = JSON.parse(localStorage.getItem("showCompleted"));
-    let savedList = JSON.parse(localStorage.getItem("list"));
 
-    setList(savedList);
+    if (!showCompleted) {
+      setItems(items.filter((item) => !item.complete));
+    } else {
+      setItems(items);
+    }
+
     changeItemsPerPage(savedItemsPerPage);
     changeShowCompleted(savedShowCompleted);
-  }, []);
 
-  const addToList = (item) => setList([...list, item]);
-
-  useEffect(() => {
-    localStorage.setItem("list", JSON.stringify(list));
-  }, [list]);
-
-  function toggleComplete(id) {
-    const items = list.map((item) => {
-      if (item.id === id) {
-        item.complete = !item.complete;
-      }
-      return item;
-    });
-    if (!showCompleted) {
-      setList(items.filter((item) => !item.complete));
-    } else {
-      setList(items);
-    }
-  }
-
-  useEffect(() => {
-    let sortedList = list?.sort((a, b) => a.difficulty - b.difficulty) || [];
-    let incompleteCount = sortedList.filter((item) => !item.complete).length;
-    setIncomplete(incompleteCount);
-    document.title = `To Do List: ${incomplete}`;
-    // linter will want 'incomplete' added to dependency array unnecessarily.
-    // disable code used to avoid linter warning
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [list]);
+  }, [items, setItems, showCompleted]);
 
   let exportedSettings = {
-    list,
-    addToList,
     defaultValues,
-    toggleComplete,
     itemsPerPage,
     showCompleted,
     changeItemsPerPage,
     changeShowCompleted,
-    incomplete,
   };
 
   return (
