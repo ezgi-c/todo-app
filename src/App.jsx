@@ -33,8 +33,7 @@ const App = () => {
       console.error( e.message)
     }
   }
-
-
+  
   useEffect( () => {
     getTodoItems();
   }, [])
@@ -44,12 +43,14 @@ const App = () => {
     setIncomplete(incompleteCount);
     document.title = `To Do List: ${incomplete}`;
     
-    let sortedList = items?.sort((a, b) => a.difficulty - b.difficulty) || [];
+    let sortedList = items
+    ?.sort((a, b) => a.difficulty - b.difficulty)
+    .sort((a,b)=> a.complete - b.complete);
     setItems(sortedList);
     // linter will want 'incomplete' added to dependency array unnecessarily.
     // disable code used to avoid linter warning
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [items], []);
 
   return (
     <LoginContext>
