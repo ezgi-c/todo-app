@@ -38,7 +38,29 @@ const List = ({ items, setItems }) => {
       );
 
       setItems(
-        settings.showCompleted ? updatedItems : updatedItems.filter((i) => !i.complete)
+        settings.showCompleted
+          ? updatedItems
+          : updatedItems.filter((i) => !i.complete)
+      );
+      console.log(response.data);
+    } catch (e) {
+      console.error(e.message);
+    }
+  };
+
+  const deleteItem = async (item) => {
+    const url = `${process.env.REACT_APP_API}/api/v1/todo/${item._id}`;
+
+    try {
+      const response = await axios.delete(url);
+
+      // remove from state
+      const updatedItems = items.filter((i) => i._id !== item._id);
+
+      setItems(
+        settings.showCompleted
+          ? updatedItems
+          : updatedItems.filter((i) => !i.complete)
       );
       console.log(response.data);
     } catch (e) {
@@ -57,16 +79,14 @@ const List = ({ items, setItems }) => {
         {displayedList.map((item) => {
           return (
             <div className="listItem" key={item._id}>
-              <Auth capability="update">
-                <Auth capability="delete">
-                  <CloseButton
-                    className="deleteButton"
-                    onClick={() => toggleComplete(item)}
-                    title="Close popover"
-                    size="xl"
-                    iconSize={20}
-                  />
-                </Auth>
+              <Auth capability="delete">
+                <CloseButton
+                  className="deleteButton"
+                  onClick={() => deleteItem(item)}
+                  title="Close popover"
+                  size="xl"
+                  iconSize={20}
+                />
               </Auth>
 
               <Auth capability="read">
@@ -82,7 +102,16 @@ const List = ({ items, setItems }) => {
                   <p>
                     <small>Difficulty: {item.difficulty}</small>
                   </p>
-                  <div>Complete: {item.complete.toString()}</div>
+                  <Auth capability="update">
+                    <button
+                      className={`completeButton ${
+                        item.complete ? "complete" : "incomplete"
+                      }`}
+                      onClick={() => toggleComplete(item)}
+                    >
+                      Complete: {item.complete.toString()}
+                    </button>
+                  </Auth>
                 </div>
               </Auth>
             </div>

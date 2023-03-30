@@ -46,6 +46,7 @@ h5 {
   width: 200px;
   height: 200px;
   border-radius: 5px;
+  position: relative;
 }
 
 form {
@@ -71,9 +72,32 @@ form > label {
   float: right;
 }
 
-// .pagination {
-//   margin:0 4em;
-// }
+.complete, .incomplete {
+  // color: blue;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  border: none;
+}
+
+.complete:hover, .incomplete:hover {
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+
+}
+
+.complete {
+  background-color: var(--form-element-bg-color);
+}
+
+.incomplete {
+  background-color: rgb(236, 143, 143);
+  color:white;
+}
+
 
 @media (min-width: 426px) {
   form {
