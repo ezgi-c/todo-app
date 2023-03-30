@@ -18,13 +18,12 @@ const List = ({ items, setItems }) => {
     setCurrentPage(newPage);
   };
 
-  const toggleComplete = (id) => {
-    items.forEach((item) => {
-      if (item.id === id) {
-        item.complete = !item.complete;
-      }
-      return items;
-    });
+  const toggleComplete = (item) => {
+    item.complete = !item.complete;
+    // axios.put
+    // url: api/v1/todo/item._id
+    // data: item
+    // update in state
   };
 
   useEffect(() => {
@@ -37,11 +36,11 @@ const List = ({ items, setItems }) => {
       <div className="List">
         {displayedList.map((item) => {
           return (
-            <div className="listItem" key={item.id}>
+            <div className="listItem" key={item._id}>
               <Auth capability="update">
                 <CloseButton
                   className="deleteButton"
-                  onClick={() => toggleComplete(item.id)}
+                  onClick={() => toggleComplete(item)}
                   title="Close popover"
                   size="xl"
                   iconSize={20}
