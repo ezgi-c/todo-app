@@ -4,7 +4,7 @@ TODO:
 
 [ ] connect app to my own api for signup, signin, and todo item CRUD  
 
-[ ] sort by: completed, date created/modified?  
+[x] sort by: __completed__, (date created/modified?)  
 [ ] deploy to render  
 [ ] more styling? mantine components?  
 

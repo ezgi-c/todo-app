@@ -22,7 +22,7 @@ const List = ({ items, setItems }) => {
     // axios.put
     // url: api/v1/todo/item._id
     // data: item
-    const url = `${process.env.REACT_APP_API}/api/v1/todo/${item._id}`;
+    const url = `${process.env.REACT_APP_API}/api/v1/todo/${item.id}`;
 
     try {
       const response = await axios.put(url, {
@@ -34,7 +34,7 @@ const List = ({ items, setItems }) => {
 
       // update in state
       const updatedItems = items.map((i) =>
-        i._id === item._id ? { ...item, complete: !item.complete } : i
+        i.id === item.id ? { ...item, complete: !item.complete } : i
       );
 
       setItems(
@@ -49,13 +49,13 @@ const List = ({ items, setItems }) => {
   };
 
   const deleteItem = async (item) => {
-    const url = `${process.env.REACT_APP_API}/api/v1/todo/${item._id}`;
+    const url = `${process.env.REACT_APP_API}/api/v1/todo/${item.id}`;
 
     try {
       const response = await axios.delete(url);
 
       // remove from state
-      const updatedItems = items.filter((i) => i._id !== item._id);
+      const updatedItems = items.filter((i) => i.id !== item.id);
 
       setItems(
         settings.showCompleted
@@ -78,7 +78,7 @@ const List = ({ items, setItems }) => {
       <div className="List">
         {displayedList.map((item) => {
           return (
-            <div className="listItem" key={item._id}>
+            <div className="listItem" key={item.id}>
               <Auth capability="delete">
                 <CloseButton
                   className="deleteButton"
