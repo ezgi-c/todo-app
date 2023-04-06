@@ -1,9 +1,12 @@
 # Lab 34 - API Integration
 
-- sort by: completed, date created?
+TODO: 
 
-- close button - if showCompleted: update, if !showCompleted: delete
-    to do: make different buttons for delete and update
+[ ] connect app to my own api for signup, signin, and todo item CRUD  
+
+[ ] sort by: completed, date created/modified?  
+[ ] deploy to render  
+[ ] more styling? mantine components?  
 
 __To Do List Manager Phase 4:__ Integrating with a live API.  
 In this phase, we will finalize the functionality of the application by connecting to live servers for __login__, __authorization__, and __data access__.
